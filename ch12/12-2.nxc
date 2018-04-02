@@ -1,0 +1,36 @@
+#include "NXCDefs.h"
+void checkI2C(byte inport)
+{
+	byte status;
+	do{
+		status= I2CCheckStatus(inport);
+	}while(status == STAT_COMM_PENDING);
+}//checkI2C
+task main()
+{
+  SetSensorLowspeed(S1);
+  int count = 6;       //一次讀取6 bytes長度
+  int xval, yval, zval;  //這三個變數用來存放3個軸向的加速度值
+  byte inI2Ccmd[];
+  byte outbuf[];
+  while (true)
+    {
+    ArrayBuild(inI2Ccmd, 0x02, 0x42);         //重新建立陣列
+    checkI2C(S1);
+    I2CBytes(S1, inI2Ccmd, count, outbuf);      //讀取1號加速度感應器
+    xval=outbuf[0];                          //載入X軸方向數據，第9到第2位元
+    yval=outbuf[1];                           //載入Y軸方向數據，第9到第2位元
+    zval=outbuf[2];                           //載入Z軸方向數據，第9到第2位元
+    if (xval > 127) xval-=256;                //將X軸向加速度值轉換為10位元
+    xval=xval*4 + outbuf[3];
+    if (yval > 127) yval-=256;                //將Y軸向加速度值轉換為10位元
+    yval=yval*4 + outbuf[4];
+    if (zval > 127) zval-=256;                //將Z軸向加速度值轉換為10位元
+    zval=zval*4 + outbuf[5];
+    ClearScreen();
+    TextOut(10,LCD_LINE5,"X axis: ");  NumOut(50, LCD_LINE5,xval);  //顯示X軸向加速度值
+    TextOut(10, LCD_LINE3,"Y axis: ");  NumOut(50, LCD_LINE3,yval);  //顯示Y軸向加速度值
+    TextOut(10, LCD_LINE1,"Z axis: ");  NumOut(50, LCD_LINE1,zval);  //顯示Z軸向加速度值
+    }//while
+}//main
+

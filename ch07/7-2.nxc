@@ -1,0 +1,11 @@
+task main()
+{
+    OnFwdReg(OUT_A, 40, OUT_REGMODE_IDLE);
+    OnFwdReg(OUT_C, 40, OUT_REGMODE_SPEED);
+    while(true)
+    {
+    NumOut(10, LCD_LINE1, MotorActualSpeed(OUT_A));
+    NumOut(10, LCD_LINE2, MotorActualSpeed(OUT_C));
+ }//while
+}//main
+

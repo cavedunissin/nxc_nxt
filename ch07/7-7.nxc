@@ -1,0 +1,7 @@
+task main()
+{
+    OnFwdReg(OUT_A, 50, OUT_REGMODE_SPEED); //開啟速度控制模式
+   until( MotorOverload(OUT_A)==1 );
+    Off(OUT_A);
+}
+

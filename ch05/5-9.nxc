@@ -1,0 +1,9 @@
+task main()
+{
+ int x;
+ RotateMotor(OUT_A, 75, 180); // ¥¿Âà180«×
+ x = MotorTachoCount(OUT_A);
+ NumOut(20, LCD_LINE3, x);
+ Wait(3000);
+}
+

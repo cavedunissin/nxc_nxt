@@ -1,0 +1,18 @@
+sub turning (int power)
+{
+   OnRev(OUT_BC, power); Wait(300);
+   OnFwd(OUT_C, power); Wait(500);
+}//turning
+
+task main()
+{
+   OnFwd(OUT_BC, 75);
+   Wait(1000);
+   turning(30);
+   Wait(2000);
+   turning(50);
+   Wait(1000);
+   turning(100);
+   Off(OUT_BC);
+}//main
+

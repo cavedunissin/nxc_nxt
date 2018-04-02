@@ -1,0 +1,15 @@
+#define TURN 850
+task main()
+{
+int move = 2000;
+repeat(20)
+{
+OnFwd(OUT_BC,75);
+Wait(move);
+OnRev(OUT_C,75);
+Wait(TURN);
+move += 500;
+}
+Off(OUT_BC);
+}
+

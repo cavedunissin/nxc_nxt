@@ -1,0 +1,13 @@
+task aaa()
+{
+int a;
+OnFwd(OUT_AC,50);
+Wait(2000);
+Off (OUT_AC);
+}//aaa
+task main()
+{
+start aaa;
+Wait(4000);
+}//main
+

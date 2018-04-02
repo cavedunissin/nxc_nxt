@@ -1,0 +1,50 @@
+//A馬達控制閥門開關
+//B馬達旋轉底部
+//顏色感應器接在2號輸入端
+task main()
+{
+  int c,r,g,b;
+  SetSensorLowspeed(S2);
+  ReadSensorHTColor(S2,c,r,g,b);
+  TextOut(10, LCD_LINE4, "Color: ");
+  NumOut(10, LCD_LINE4, c); //顯示顏色值
+  Wait(500);
+  switch(c) //以顏色值進行switch判斷
+  {
+    case 0://代表黑色
+    RotateMotor(OUT_B,100,3000);
+    RotateMotor(OUT_A,75,60);
+    RotateMotor(OUT_A,75,-60);
+    RotateMotor(OUT_B,100,-3000);
+    Off(OUT_B);
+    break;
+
+    case 2://代表藍色
+    RotateMotor(OUT_B,100,1000);
+    RotateMotor(OUT_A,75,60);
+    RotateMotor(OUT_A,75,-60);
+    RotateMotor(OUT_B,100,-1000);
+    Off(OUT_B);
+    break;
+
+    case 4://代表綠色
+    RotateMotor(OUT_B,100,-3000);
+    RotateMotor(OUT_A,75,60);
+    RotateMotor(OUT_A,75,-60);
+    RotateMotor(OUT_B,100,3000);
+    Off(OUT_B);
+    break;
+
+    case 5://代表黃色
+    RotateMotor(OUT_B,100,-1000);
+    RotateMotor(OUT_A,75,60);
+    RotateMotor(OUT_A,75,-60);
+    RotateMotor(OUT_B,100,1000);
+    Off(OUT_B);
+    break;
+
+    default:
+    break;
+  }//switch
+}//main
+

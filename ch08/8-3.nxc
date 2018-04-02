@@ -1,0 +1,23 @@
+task main()
+{
+   SetSensor(S1, SENSOR_ROTATION);
+   ClearSensor(S1);
+   SetSensor(S3, SENSOR_ROTATION);
+   ClearSensor(S3);
+   while (true)
+   {
+      if (SENSOR_1 < SENSOR_3) //C馬達轉較快
+      {
+         OnFwd(OUT_A, 75); Float(OUT_C);
+      }
+      else if (SENSOR_1 > SENSOR_3) //A馬達轉較快
+      {
+         OnFwd(OUT_C, 75); Float(OUT_A);
+      }
+      else
+      {
+         OnFwd(OUT_AC, 75);
+      }
+   }//while
+}//main
+

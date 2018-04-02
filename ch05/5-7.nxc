@@ -1,0 +1,15 @@
+#define SOUND 90
+task main()
+{
+     while(true)
+     {
+          SetSensorSound(S3);
+          until(Sensor(S3) > SOUND);
+          OnFwd(OUT_BC,100);
+          Wait(1000);
+          until(Sensor(S3) > SOUND);
+          Off(OUT_BC);
+          Wait(1000);
+     }
+}
+

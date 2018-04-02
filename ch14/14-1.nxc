@@ -1,0 +1,30 @@
+#define T1 Sensor(S1)
+#define T2 Sensor(S2)
+
+task main()
+{
+     SetSensorTouch(S1);
+     SetSensorTouch(S2);
+     while(true)
+     {
+          if(T2 == 1 && T1 == 1)
+          {
+               OnFwd(OUT_AB,100);
+          }
+          else if(T1 == 1 && T2 == 0)
+          {
+               Off(OUT_B);
+               OnFwd(OUT_A,100);
+          }
+          else if(T2 == 1 && T1 == 0)
+          {
+               Off(OUT_A);
+               OnFwd(OUT_B,100);
+          }
+          else
+          {
+               Off(OUT_AB);
+          }
+     }//while
+}//main
+

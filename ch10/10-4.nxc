@@ -1,0 +1,30 @@
+//slave
+#define INBOX 5
+#define OUTBOX 3
+sub BTCheck(int conn)
+{
+if (!BluetoothStatus(conn)==NO_ERR)
+{
+TextOut(5,LCD_LINE2,"Error"); //顯示連線錯誤訊息
+Wait(1000);
+Stop(true);
+}//if
+}//BTCheck
+task main()
+{
+BTCheck(0); // 從slave來看，master都是連接在line 0
+bool bval;
+while(true)
+{
+while(bval == 0)
+{
+     ReceiveRemoteBool(INBOX, true, bval);
+     }
+     OnFwd(OUT_A,100);
+     Wait(3000);
+     Off(OUT_A);
+     SendResponseBool(OUTBOX,1);
+     bval = 0;
+}//while
+}//main
+

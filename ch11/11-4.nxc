@@ -1,0 +1,10 @@
+task main(){
+   TextOut(0,LCD_LINE2,"System:");
+   TextOut(0,LCD_LINE4,"Program:");
+   while(true){
+      NumOut(50,LCD_LINE2,CurrentTick());
+      NumOut(50,LCD_LINE4,FirstTick());
+      Wait(200);
+  }//while
+}//main
+

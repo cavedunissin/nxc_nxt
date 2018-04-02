@@ -1,0 +1,9 @@
+task main(){
+  while(true){
+    TextOut(0,40,"Pressed:");
+    NumOut(50,40, ButtonPressed(BTNRIGHT, false));
+    TextOut(0,20,"Count:");
+    NumOut(50,20, ButtonCount(BTNRIGHT, false));
+  }//while
+}//main
+

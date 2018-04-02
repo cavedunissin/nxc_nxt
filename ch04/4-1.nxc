@@ -1,0 +1,12 @@
+task main()
+{
+   int a = 170, b = 75;
+   int c;
+   while(true)
+   {
+      int c = a&b; //a,b進行AND運算後存入c
+      NumOut(20, 20,c); //將c值顯示在LCD上
+      Wait (300); //每0.3秒更新一次
+   }//while
+}//main
+

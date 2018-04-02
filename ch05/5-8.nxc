@@ -1,0 +1,21 @@
+#define dist 15 //cm
+task main()
+{
+    SetSensorLowspeed(S4);
+    while(true)
+    {
+        OnFwd(OUT_AC,70);
+        if( SensorUS(S4)< dist )
+        {
+            Off(OUT_AC);
+            Wait(500);
+            OnRev(OUT_AC,70);
+            Wait(500);
+            Off(OUT_AC);
+            OnRev(OUT_C,70);
+            Wait(500);
+            Off(OUT_C);
+        }//if
+     }//whlie
+}//main
+

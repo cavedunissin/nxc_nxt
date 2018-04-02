@@ -1,0 +1,47 @@
+task main()
+{
+     SetSensorLight(S1);
+     int x,y;
+     int l,h,delta_l, delta_h;
+     /*
+     原始光值x校正後為y,先將光感應器放在白色上,按左鍵後記錄下白色值,白色差值(delta_h)並將其校正為100.再將光感應器放在黑色上,按左鍵後記錄下黑色值,黑色差值(delta_l)並將其校正為0,經過公式運算後,將y顯示在螢幕上
+     */
+
+     //白色校正
+     TextOut(0,LCD_LINE4,"UnCali white:");
+     NumOut(80,LCD_LINE4,Sensor(S1));
+     until(ButtonPressed(BTNLEFT, false));
+     ClearScreen();
+     PlayTone(440,40);
+     h =100;
+     delta_h = 100 - Sensor(S1);
+     TextOut(0,LCD_LINE4,"Cali white:");NumOut(80,LCD_LINE4,h);
+     TextOut(0,LCD_LINE6,"Delta high:");NumOut(80,LCD_LINE6,delta_h);
+     Wait(5000);
+
+     //黑色校正
+     ClearScreen();
+     TextOut(0,LCD_LINE4,"UnCali Black:");
+     NumOut(80,LCD_LINE4,Sensor(S1));
+     until(ButtonPressed(BTNLEFT, false));
+     ClearScreen();
+     PlayTone(440,40);
+     l =0;
+     delta_l = Sensor(S1)-0;
+     TextOut(0,LCD_LINE4,"Cali white:");NumOut(80,LCD_LINE4,l);
+     TextOut(0,LCD_LINE6,"Delta high:");NumOut(80,LCD_LINE6,delta_l);
+     Wait(2000);
+
+     until(ButtonPressed(BTNLEFT, false));
+     ClearScreen();
+     PlayTone(880,40);
+     while(true)
+     {
+         ClearScreen();
+         y= 100*(Sensor(S1)-l)/(h-l); //利用內插法得到校正後的光值
+         TextOut(0,LCD_LINE4,"Cali value:");
+         NumOut(80,LCD_LINE4,y);
+         Wait(100);
+     }//while
+}//main
+

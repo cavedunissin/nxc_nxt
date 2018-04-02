@@ -1,0 +1,11 @@
+task main()
+{
+   int a = 3;
+   while(a < 5)//§PÂ_a¬O§_¤p©ó5
+   {
+      OnFwd(OUT_BC,75);
+      Wait(1000);
+      a = 5;
+   }//main
+}//main
+

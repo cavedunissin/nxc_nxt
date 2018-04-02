@@ -1,0 +1,81 @@
+// I2C全域變數
+int count;
+byte cmndbuf[];                 //傳送到  I2C 的指令暫存區
+byte respbuf[];                 // I2C 傳來的資料暫存區
+
+#define I2C_DELAY 7
+
+//AC為調變模式
+bool ReadSensorHTIRSeekerAC(int port, int &dir, int &s1, int &s3, int &s5, int &s7, int &s9);
+{
+  ArrayInit(cmndbuf, 0, 2);        //暫存區初始 兩個位元組
+  cmndbuf[0] = 0x10;            // 設定 I2C 通道號碼
+  cmndbuf[1] = 0x49;            // 設定讀取位址
+  count=6;                     //因 1.04 版韌體錯誤須設值 6 才能讀回  8 個位元組資料
+  I2CBytes(port, cmndbuf, count, respbuf);  //傳出 I2C 指令並讀回  8 個位元組資料
+  Wait(I2C_DELAY);
+
+  if(ArrayLen(respbuf)==6) {
+    dir = respbuf[0];
+    s1  = respbuf[1];
+    s3  = respbuf[2];
+    s5  = respbuf[3];
+    s7  = respbuf[4];
+    s9  = respbuf[5];
+    return true;
+  } else {
+    return false;
+  }
+}// AC模式
+
+//DC為常數模式
+bool ReadSensorHTIRSeekerDC(int port, int & dir, int & s1, int & s3, int & s5, int & s7, int & s9);
+{
+  ArrayInit(cmndbuf, 0, 2);        //暫存區初始 兩個位元組
+  cmndbuf[0] = 0x10;            // 設定 I2C 通道號碼
+  cmndbuf[1] = 0x42;            //設定讀取位址
+  count=6;                     //因 1.04版韌體錯誤須設值 6才能讀回 8個位元組資料
+  I2CBytes(port, cmndbuf, count, respbuf);  //傳出 I2C指令並讀回  8個位元組資料
+  Wait(I2C_DELAY);
+
+  if(ArrayLen(respbuf)==6) {
+    dir = respbuf[0];
+    s1  = respbuf[1];
+    s3  = respbuf[2];
+    s5  = respbuf[3];
+    s7  = respbuf[4];
+    s9  = respbuf[5];
+    return true;
+  } else {
+    return false;
+  }
+}//DC模式
+
+task main()
+{
+  int dir,  s1, s3, s5, s7, s9;
+  bool bVal;
+  SetSensorLowspeed(S1);
+  Wait(100);
+  TextOut(0, LCD_LINE1, "HiTechnic");
+  TextOut(2*6, LCD_LINE2, "IRSeeker V2");
+  while(true) {
+    bVal = ReadSensorHTIRSeekerAC(S1, dir, s1, s3, s5, s7, s9);
+    if (bVal) {
+      TextOut(0, LCD_LINE3, "Dir:         ");
+      NumOut(7*6,LCD_LINE3, dir);
+      //下列三行清除螢幕顯示
+      TextOut(0, LCD_LINE5, "               ");
+      TextOut(0, LCD_LINE6, "               ");
+      TextOut(0, LCD_LINE8, "               ");
+      //下列五行以弧狀顯示感應數值
+      NumOut(3*6, LCD_LINE8, s1);
+      NumOut(2*6, LCD_LINE6, s3);
+      NumOut(7*6, LCD_LINE5, s5);
+      NumOut(11*6, LCD_LINE6, s7);
+      NumOut(10*6, LCD_LINE8, s9);
+    }//if
+    Wait(50); //約以每秒二十次更新數值
+   }//while
+}//main
+

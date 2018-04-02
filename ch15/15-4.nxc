@@ -1,0 +1,45 @@
+#define pwr 40
+#define scaleChange 20
+task main()
+{
+      SetSensorLight(S1);
+      SetSensorLight(S2);
+      SetSensorLight(S3);
+
+      int vL, vM, vR; //分別紀錄1,2,3號光感應器值
+      int scaleL = (vL+vM)/2; //左側目標值
+      int scaleR = (vR+vM)/2; //右側目標值
+      while(true)
+    {
+           if((Sensor(S1)-Sensor(S2))>=scaleChange || (Sensor(S3)-Sensor(S2))>=scaleChange)
+        {
+                    vL = Sensor(S1);
+                    vM = Sensor(S2);
+                    vR = Sensor(S3);
+                    scaleL = (vL+vM)/2;
+                    scaleR = (vR+vM)/2;
+             }
+                if(vL>scaleL && vR>scaleR) //補上說明
+   {
+                    OnRev(OUT_AC, pwr);
+             }//
+             else if(vL>scaleL && vR<=scaleR) //補上說明
+   {
+               OnRev(OUT_A, pwr);
+                    Off(OUT_C);
+                    until(Sensor(S2))
+             }//else if
+             else if(vL<=scaleL && vR>scaleR) //補上說明
+   {
+                    OnRev(OUT_C, pwr);
+                    Off(OUT_A);
+                    until(Sensor(S2))
+             }//else if
+             else //補上說明
+   {
+                    PlayTone(600, 200);
+                    OnRev(OUT_AC, pwr);
+             }//else
+     }//while
+}//main
+

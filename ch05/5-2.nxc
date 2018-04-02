@@ -1,0 +1,19 @@
+task main()
+{
+SetSensorTouch(S1);
+while (true)
+{
+OnFwd(OUT_BC, 60);
+if (Sensor(S1) == 1)
+{
+OnRev(OUT_BC, 75);
+Wait(500);
+Off(OUT_BC);
+OnFwd(OUT_C, 75);
+Wait(1000);
+Off(OUT_C);
+Wait(300);
+}//if
+}//while
+}//main
+

@@ -1,0 +1,34 @@
+#include "NXCDefs.h"
+void checkI2C(byte inport)
+{
+	byte status;
+	do{
+		status= I2CCheckStatus(inport);
+	}while(status == STAT_COMM_PENDING);
+}//checkI2C
+task main()
+{
+  SetSensorLowspeed(S1);
+  int count = 3;          //一次讀取3 bytes長度
+  int rval, gval, bval;   //存放紅色、綠色、藍色顏色值
+  int c,r,g,b;            //NXC顏色感應器參數
+  byte inI2Ccmd[];
+  byte outbuf[];
+  while (true)
+    {
+    ArrayBuild(inI2Ccmd, 0x02, 0x43);         //重新建立陣列
+    I2CBytes(S1, inI2Ccmd, count, outbuf);      //讀取1號顏色感應器
+    checkI2C(S1);
+    rval=outbuf[0];                           //載入紅色值
+    gval=outbuf[1];                           //載入綠色值
+    bval=outbuf[2];                           //載入藍色值
+
+    ReadSensorHTColor(S1,c,r,g,b);
+    ClearScreen();
+    TextOut(10, LCD_LINE2,"RED:   "); NumOut(50, LCD_LINE2,rval);  //顯示紅色值
+    TextOut(10, LCD_LINE4,"GREEN: "); NumOut(50, LCD_LINE4,gval);  //顯示綠色值
+    TextOut(10, LCD_LINE6,"BLUE:  "); NumOut(50, LCD_LINE6,bval);  //顯示藍色值
+    TextOut(10, LCD_LINE8,"COLOR: "); NumOut(50, LCD_LINE8,c);    //顯示顏色值
+    }//while
+}//main
+

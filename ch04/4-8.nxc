@@ -1,0 +1,19 @@
+int move, turn, sum;
+task main()
+{
+sum = 0;
+do
+{
+move = Random(2000);
+turn = Random(1500);
+OnFwd(OUT_AC, 60);
+Wait(move);
+OnRev(OUT_C, 80);
+Wait(turn);
+sum += move;
+sum += turn;
+}while (sum<10000);
+PlayTone(440,500);
+Off(OUT_AC;)
+}//main
+

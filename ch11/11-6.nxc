@@ -1,0 +1,14 @@
+task main(){
+  int x=0;
+  while(true){
+     ClearScreen();
+     if(ButtonPressed(BTNRIGHT,true))
+     {x+=1;}
+     if(ButtonPressed(BTNLEFT, true))
+     {x-=1;}
+     TextOut(0,LCD_LINE4,"Input value:"); NumOut(80,LCD_LINE4,x);
+     TextOut(0,LCD_LINE2,"Square root:"); NumOut(80,LCD_LINE2,Sqrt(x));
+     Wait(200);
+  }//while
+}//main
+

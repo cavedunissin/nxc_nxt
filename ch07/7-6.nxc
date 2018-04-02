@@ -1,0 +1,12 @@
+task main()
+{
+    RotateMotorEx(OUT_AC, 40, 360, 0, true, true);
+   //AC馬達以 40%的電力旋轉 360度、直走、啟用同步模式、使用電子煞車
+    RotateMotorEx(OUT_AC, 40, 180, 25, false, true);
+   //AC馬達以 40%的電力旋轉 180度、微轉彎、無同步、使用電子煞車
+    RotateMotorEx(OUT_AC, 80, 180, -50, true, false);
+   //AC馬達以 80%的電力旋轉 180度、反向以單輪為圓心轉彎、啟用同步模式、無煞車
+   RotateMotorEx(OUT_AC, 80, 360, 100, false, false);
+   //AC馬達以 80%的電力旋轉 360度、原地旋轉、無同步、無煞車
+}
+

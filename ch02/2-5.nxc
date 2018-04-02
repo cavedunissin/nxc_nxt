@@ -1,0 +1,17 @@
+#define MOVE 1000
+#define TURN 850
+task main()
+{
+repeat(2) //重複 2次
+{
+repeat(5) //重複 5次
+{
+OnFwd(OUT_BC,75);
+Wait(MOVE);
+               OnRev(OUT_BC,75);
+Wait(TURN);
+}//repeat(2)
+}//repeat(5)
+    Off(OUT_BC);
+}//main
+

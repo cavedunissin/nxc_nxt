@@ -1,0 +1,14 @@
+task main()
+{
+  int x,y;
+  SetSensorLight(S1);
+  while(true){
+    x = GetInput(S1, Type);
+    y = GetInput(S1, InputMode);
+TextOut(20,LCD_LINE2, "Type:  ");
+    NumOut(60,LCD_LINE2, x);
+    TextOut(20,LCD_LINE4, "Mode:  ");
+    NumOut(60,LCD_LINE4, y);
+  }//while
+}//main
+

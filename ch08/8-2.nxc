@@ -1,0 +1,12 @@
+task main()
+{
+    SetSensorType(S1, SENSOR_TYPE_COLORRED); //顏色感應器開紅燈
+    SetSensorMode(S1, SENSOR_MODE_PERCENT); //將讀取到的值轉成百分比（預設是RAW）
+    while(true)
+    {
+        NumOut( 0,LCD_LINE3,Sensor(S1) );
+        Wait(100);
+        ClearScreen();
+    }
+}
+

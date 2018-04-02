@@ -1,0 +1,13 @@
+#define turning OnRev(OUT_B, 75); Wait(3400);OnFwd(OUT_BC, 75);
+task main()
+{
+   OnFwd(OUT_BC, 75);
+   Wait(1000);
+   turning;
+   Wait(2000);
+   turning;
+   Wait(1000);
+   turning;
+   Off(OUT_BC);
+}
+

@@ -1,0 +1,8 @@
+task main ()
+{
+       SetSensorLowspeed(S4);
+       OnFwd(OUT_A,75);
+       until( SensorUS(S4) < 20);
+       Off(OUT_A);
+}
+

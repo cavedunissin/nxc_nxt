@@ -1,0 +1,11 @@
+task main()
+{
+int aaa=10;
+int bbb=20*5; //bbb為100
+int ccc=bbb; //ccc也為100
+
+ccc /= aaa; //ccc為10
+ccc -= 5; //ccc為5
+aaa = 10*(ccc+3); //aaa現值為 80
+}
+

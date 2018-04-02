@@ -1,0 +1,19 @@
+task main()
+{
+    int dir,  s1, s3, s5, s7, s9;
+    bool bVal;
+SetSensorLowspeed(S4); //設定紅外線感應器接在4號輸入端
+    ClearSensor(S4); //清空感應器值
+    while(true)
+    {
+       bVal = ReadSensorHTIRSeeker(S4,dir,s1,s3,s5,s7,s9);
+       if (dir<5)  //小於5，球在左邊，機器人要左轉
+       {
+       OnFwd(OUT_A,35);Float(OUT_C);}
+       else if (dir>5)  //大於5，球在右邊，機器人要右轉
+       {OnFwd(OUT_C,35);Float(OUT_A);}
+       else         //等於5，球在前方，機器人要前進
+       {OnFwd(OUT_AC,80);}
+    }//while
+}//main
+

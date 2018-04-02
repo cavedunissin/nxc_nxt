@@ -1,0 +1,25 @@
+//Slave»»±±¨®
+#define BT_Conn 0
+
+sub BTCheck(int conn)
+{
+    if (!BluetoothStatus(conn)==NO_ERR)
+    {
+        TextOut(5,LCD_LINE2,"No Connection!");
+        Wait(2000);
+        Stop(true);
+    }
+}//BTCheck
+task main()
+{
+     int A;
+     int B;
+     BTCheck(BT_Conn);
+     while(true)
+     {
+          ReceiveRemoteNumber(1,false,A);
+          ReceiveRemoteNumber(3,false,B);
+          OnFwdSync(OUT_AB,A,B);
+     }//while
+}//main
+

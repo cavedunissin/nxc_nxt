@@ -1,0 +1,13 @@
+task main()
+{
+     SetSensorLight(S2);
+int L = 0;
+while(true)
+{
+     ClearScreen();
+     L = Sensor(S2);
+     NumOut( 30 , LCD_LINE3 , L );
+     Wait(300);
+}//while
+}//main
+

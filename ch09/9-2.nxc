@@ -1,0 +1,30 @@
+mutex move;//宣告一個名為 move的mutex型別變數
+task square()
+{
+   while (true)
+   {
+      Acquire(move);//宣告對move的使用權，成功取得使用權後才可進行之後的動作
+      OnFwd(OUT_AC, 75); Wait(1000);
+OnRev(OUT_C, 75); Wait(850);
+Release(move);//釋放對move的使用權
+}//while
+}//square
+task bumping()
+{
+   while (true)
+   {
+      if (Sensor(S1) == 1)//1號觸碰感應器被壓下
+      {
+          Acquire(move);
+          OnRev(OUT_AC, 75); Wait(500);
+          OnFwd(OUT_A, 75); Wait(850);
+          Release(move);
+       }//if
+    }//while
+}//bumping
+task main()
+{
+   SetSensorTouch(S1);
+   Precedes(bumping, square);
+}//main
+

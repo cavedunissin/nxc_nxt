@@ -1,0 +1,45 @@
+//Slave
+#define BT_conn 0
+#define INBOX_1 1
+#define INBOX_2 2
+
+sub BTCheck(int conn)
+{
+    if (!BluetoothStatus(conn)==NO_ERR)
+    {
+        TextOut(5,LCD_LINE2,"No Connection!");
+        Wait(1000);
+        Stop(true);
+    }
+}//BTCheck
+task main()
+{
+     BTCheck(0);
+     int MOTOR_A = 0;
+     int MOTOR_B = 0;
+     while(true)
+     {
+          ReceiveRemoteBool(INBOX_1,false,MOTOR_A);
+          ReceiveRemoteBool(INBOX_2,false,MOTOR_B);
+          if( MOTOR_A==1 && MOTOR_B==1)
+          {
+               OnFwd(OUT_A,100);
+               OnFwd(OUT_B,100);
+          }
+          else if( MOTOR_A==1 && MOTOR_B==0)
+          {
+               Off(OUT_B);
+               OnFwd(OUT_A,100);
+          }
+          else if( MOTOR_A==0 && MOTOR_B==1)
+          {
+                Off(OUT_A);
+                OnFwd(OUT_B,100);
+          }
+          else if( MOTOR_A==0 && MOTOR_B==0)
+          {
+               Off(OUT_AB);
+          }
+     }//while
+}//main
+

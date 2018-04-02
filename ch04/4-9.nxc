@@ -1,0 +1,10 @@
+task main()
+{
+  int i;
+  for(i=1;i<5;i++)
+  {
+    PlayTone(262, 400);//¼½©ñdo­µ0.4¬í
+    Wait(500);
+  }//for
+}//main
+

@@ -1,0 +1,13 @@
+…
+SetOutput(OUT_A,
+   Power, 0, //電力為0
+   OutputMode, OUT_MODE_MOTORON+OUT_MODE_BRAKE+OUT_MODE_
+REGULATED, //確定供電、啟動電子煞車與控制模式
+   RegMode, OUT_REGMODE_SPEED, //啟動速度控制模式
+   RunState, OUT_RUNSTATE_RUNNING, //Runstate為RUNNING
+   RegPValue, 96,     RegIValue, 32, RegDValue, 32, //設定 PID
+
+UpdateFlags,UF_UPDATE_SPEED+UF_UPDATE_MODE+UF_UPDATE_PID_VALUES);
+//確認對SPEED, MODE, PID值的改變
+…
+

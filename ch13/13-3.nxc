@@ -1,0 +1,26 @@
+task main()
+{
+int a;
+NumOut(0, 0, a); //在座標 (0,0)處輸出變數 a的值
+Wait(2000);
+ClearScreen(); //清空畫面
+TextOut(10, 10, "I love LEGO"); //在座標(10,10)處輸出 "I love LEGO"字樣
+Wait(2000);
+ClearScreen();
+GraphicOut(30, 30, "LEGO.ric"); //在座標(0,0)處輸LEGO.ric圖檔
+Wait(2000);
+ClearScreen();
+CircleOut(40,40,10); //輸出半徑為10的圓
+Wait(2000);
+ClearScreen();
+LineOut(10, 10, 20,30); //輸出一條從(10,10)到(20,30)的直線
+Wait(2000);
+ClearScreen();
+PointOut(25, 25); //在(25, 25)處輸出一點
+Wait(2000);
+ClearScreen();
+RectOut(40,40,20,30); //在(40, 40)處輸出一橫長 20，縱長 30的矩形。
+Wait(2000);
+ClearScreen();
+}
+

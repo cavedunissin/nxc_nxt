@@ -1,0 +1,10 @@
+task main()
+{
+     SetSensorColorRed(S2);
+     Wait(3000);
+     SetSensorColorGreen(S2);
+     Wait(3000);
+     SetSensorColorBlue(S2);
+     Wait(3000);
+}
+

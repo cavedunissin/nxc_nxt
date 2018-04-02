@@ -1,0 +1,19 @@
+#define MOVE 1000//直走所需時間
+#define TURN 850  //轉90度所需時間
+
+/*此程式會使機器人走正方形路線 */
+task main()
+{
+repeat(2)
+{
+     repeat(5)
+     {
+           OnFwd(OUT_BC,75);
+               Wait(MOVE);
+               OnRev(OUT_BC,75);
+               Wait(TURN);
+          }//repeat(5)
+     }//repear(2)
+   Off(OUT_BC);//關掉馬達
+}//main
+

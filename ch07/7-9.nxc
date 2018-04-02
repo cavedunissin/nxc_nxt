@@ -1,0 +1,18 @@
+task main()
+{
+   SetOutput(OUT_A,RegPValue,30,RegIValue,40,RegDValue,50);
+   int a = MotorRegPValue(OUT_A);
+   int b = MotorRegIValue(OUT_A);
+   int c = MotorRegDValue(OUT_A);
+   while(true)
+   {
+      RotateMotorExPID(OUT_A, 75, 360, 30, false, true, a, b, c);
+      TextOut(0, LCD_LINE1, "P value:");
+      NumOut(50, LCD_LINE1, a);
+      TextOut(0, LCD_LINE3, "I value:");
+      NumOut(50, LCD_LINE3, b);
+      TextOut(0, LCD_LINE5, "D value:");
+      NumOut(50, LCD_LINE5, MotorRegDValue(OUT_A));//
+   }//while
+}//main
+

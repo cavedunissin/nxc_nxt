@@ -1,0 +1,9 @@
+task main()
+{
+    RotateMotor(OUT_A, 50,360); //A馬達逆時鐘轉一圈
+    RotateMotor(OUT_A, 50,-360); //A馬達順時鐘轉一圈
+    RotateMotor(OUT_A, -50,-360); //A馬達逆時鐘轉一圈
+    RotateMotor(OUT_C, 50,-360); //C馬達順時鐘轉一圈
+    RotateMotor(OUT_C, -50,360); //C馬達順時鐘轉一圈
+}
+

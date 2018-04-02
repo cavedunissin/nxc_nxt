@@ -1,0 +1,32 @@
+//master  請將觸碰感應器接在1號輸入端
+#define BT_CONN 1
+#define OUTBOX 5
+#define INBOX 3
+sub BTCheck (int conn)
+{
+if (!BluetoothStatus(conn)==NO_ERR)
+{
+TextOut(5,LCD_LINE2,"Error");//顯示連線錯誤訊息
+Wait(1000);
+Stop(true);
+}//if
+}// BTCheck
+task main()
+{
+BTCheck (BT_CONN); //檢查與slave之連線
+SetSensorTouch(S1);
+    bool n;
+    while(true)
+    {
+         until(Sensor(S1) == 1);
+         SendRemoteBool(BT_CONN, OUTBOX, 1);
+         while(n == 0)
+         {
+              ReceiveRemoteBool(INBOX, true, n);
+         }
+         PlayTone(440,300);
+         Wait(300);
+         n = 0;
+    }//while
+}//main
+

@@ -1,0 +1,19 @@
+inline void turning(int power, int turn)
+{
+   OnRev(OUT_C, power);
+   Wait(turn);
+   OnFwd(OUT_BC, power);
+}//turning
+
+task main()
+{
+   OnFwd(OUT_BC, 75);
+   Wait(1000);
+   turning(75, 1500);
+   Wait(2000);
+   turning(80, 400);
+   Wait(1000);
+   turning(60, 2500);
+   Off(OUT_BC);
+}//main
+

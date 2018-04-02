@@ -1,0 +1,35 @@
+bool smp;
+task square()
+{
+ while (true)
+     {
+        until (smp == 0); smp = 1;//持續等候 smp是否空下來
+        OnFwd(OUT_AC, 75);
+        smp = 0; //使用完畢
+        Wait(1000);
+        until (smp == 0); smp = 1; //持續等候 smp是否空下來
+        OnRev(OUT_C, 75);
+        smp = 0; //使用完畢
+        Wait(850);
+     }//while
+}//square
+task bumping()
+{
+SetSensorTouch(S1);
+while (true)
+{
+if (Sensor(S1) == 1) //1號觸碰感應器被壓下
+{
+until (smp == 0); smp = 1; //持續等候 smp是否空下來
+OnRev(OUT_AC, 75); Wait(500);
+OnFwd(OUT_A, 75); Wait(850);
+smp = 0; //使用完畢
+}//if
+}//while
+}//bumping
+ task main()
+{
+smp= 0;
+Precedes(square, bumping);
+}//main
+

@@ -1,0 +1,22 @@
+task main(){
+SetSensorLowspeed(S1);//設定指南針感應器接在1號輸入端
+while(true)
+{
+   if(SensorHTCompass(S1) == 180) //機器人面向北方
+   {
+     Off(OUT_AC);
+     PlayTone(440,40);
+     Wait(1000);
+   }//if
+   else
+   {
+     ClearScreen();
+     TextOut(0, 0," Direction: ");
+NumOut(0,55,SensorHTCompass(S1)); //顯示指南針感應器值
+     OnFwdSync(OUT_AC,30,50);
+     //AC馬達以30%電力，以同步模式進行以A馬達為圓心的順時鐘轉彎
+     Wait(200);
+   }//else
+ }//while
+}//main
+

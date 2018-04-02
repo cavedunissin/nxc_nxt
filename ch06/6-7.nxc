@@ -1,0 +1,15 @@
+#define right(s,t) \
+OnFwd(OUT_A, s);OnRev(OUT_B, s);Wait(t);
+#define left(s,t) \
+OnRev(OUT_A, s);OnFwd(OUT_B, s);Wait(t);
+#define forward(s,t) OnFwd(OUT_BC, s);Wait(t);
+#define backward(s,t) OnRev(OUT_BC, s);Wait(t);
+task main()
+{
+   forward(60,2000);
+   left(30,750);
+   right(40,750);
+   backward(80,1000);
+   Off(OUT_BC);
+}
+

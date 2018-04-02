@@ -1,0 +1,14 @@
+task main()
+{
+     int move, turn;
+while(true)
+     {
+          move = Random(60);
+          turn = Random(40);
+          OnFwd(OUT_AC, 75);
+          Wait(move * 10);
+          OnRev(OUT_A, 75);
+          Wait(turn * 10);
+    }//while
+}//main
+

@@ -1,0 +1,55 @@
+#define H 60  //馬達高轉速
+#define L 40  //馬達低轉速
+task main()
+{
+      SetSensorLight(S1);
+      SetSensorLight(S2);
+      SetSensorTouch(S3);
+      SetSensorTouch(S4);
+      int S1_N, S1_Br, S1_Da; //宣告1號光感應器的目標值、白色值與黑色值
+      int S2_N, S2_Br, S2_Da; //宣告2號光感應器的目標值、白色值與黑色值
+
+      until(Sensor(S3)==1); //按下3號觸碰感應器
+      S1_Br=Sensor(S1);   //紀錄1號光感應器的白色值
+      S2_Da=Sensor(S2);  //紀錄2號光感應器的黑色值
+
+ until(Sensor(S4)==1); //按下4號觸碰感應器
+      S1_Da=Sensor(S1);  //紀錄1號光感應器的黑色值
+      S2_Br=Sensor(S2);  //紀錄2號光感應器的白色值
+
+      while(true)
+ {
+           S1_N=(S1_Br+S1_Da)/2;   //計算1號光感應器的目標值
+          S2_N=(S2_Br+S2_Da)/2;   //計算2號光感應器的目標值
+    if(Sensor(S1)>S1_N && Sensor(S2)>S2_N) //1白2白 -> 前進
+   {
+        S1_Br=Sensor(S1); //重新紀錄號1光感應器的白色值
+        S2_Br=Sensor(S2); //重新紀錄號2光感應器的白色值
+        OnRev(OUT_AC, L);
+           }//if
+           else if(Sensor(S1)>S1_N && Sensor(S2)<=S2_N) //1白2黑 -> 左前方修正
+   {
+        S1_Br=Sensor(S1); //重新紀錄號1光感應器的白色值
+        S2_Da=Sensor(S2); //重新紀錄號2光感應器的黑色值
+        OnRev(OUT_A, H);
+            Off(OUT_C);
+            Wait(500);
+           }//else if
+           else if(Sensor(S1)<=S1_N && Sensor(S2)>S2_N) //1黑2白-> 右前方修正
+   {
+        S1_Da=Sensor(S1); //重新紀錄號1光感應器的黑色值
+        S2_Br=Sensor(S2); //重新紀錄號2光感應器的白色值
+            Off(OUT_A);
+            OnRev(OUT_C, H);
+            Wait(500);
+           }//else if
+           else //1黑2黑 -> 遇十字路口直走
+   {
+      S1_Da=Sensor(S1); //重新紀錄號1光感應器的黑色值
+       S2_Da=Sensor(S2); //重新紀錄號2光感應器的黑色值
+            OnRev(OUT_AC, L);
+            PlayTone(440, 50);
+           }//else
+     }//while
+}//main
+

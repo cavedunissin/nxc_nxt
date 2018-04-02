@@ -1,0 +1,20 @@
+task main()
+{
+    SetSensorType(S1, SENSOR_TYPE_TOUCH);
+    SetSensorMode(S1, SENSOR_MODE_PULSE);
+    while(true)
+    {
+        ClearSensor(S1); //將感應器內的計數器歸零
+        until( Sensor(S1) > 0 ); //等待觸碰感應器被壓下
+        Wait(500);  //壓下後，等待0.5秒
+        if ( Sensor(S1) == 1 ) //表示觸碰感應器在0.5秒內被壓下一次
+        {
+            Off(OUT_AC);
+        }
+        if ( Sensor(S1) == 2 ) //表示觸碰感應器在0.5秒內被壓下兩次
+        {
+            OnFwd(OUT_AC, 75);
+        }
+    }//while
+}//main
+

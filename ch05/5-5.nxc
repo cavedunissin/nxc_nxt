@@ -1,0 +1,36 @@
+task main()
+{
+     SetSensorColorFull(S2);
+     string cname;
+     int ColorValue;
+     while(true)
+     {
+          ClearScreen();
+          ColorValue = Sensor(S2);
+          switch(ColorValue)
+          {
+                case 1:
+                   cname = "Black";
+                   break;
+                case 2:
+                   cname = "Blue";
+                   break;
+                case 3:
+                   cname = "Green";
+                   break;
+                case 4:
+                   cname = "Yellow";
+                   break;
+                case 5:
+                   cname = "Red";
+                   break;
+                case 6:
+                   cname = "White";
+                   break;
+                default : cname = "Unknown";
+          }//switch
+          TextOut(0, LCD_LINE4, cname);
+          Wait(100);
+     }//while
+}//main
+

@@ -1,0 +1,46 @@
+//Master ทnฑ์
+#define BT_Conn 1
+
+sub BTCheck(int conn)
+{
+    if (!BluetoothStatus(conn)==NO_ERR)
+    {
+        TextOut(5,LCD_LINE2,"No Connection!");
+        Wait(2000);
+        Stop(true);
+    }
+}//BTCheck
+task main()
+{
+     BTCheck(BT_Conn);
+     SetSensorTouch(S1);
+     until(Sensor(S1)==1);
+     ResetRotationCount(OUT_AB);
+     PlayTone(440,300);
+     int A;
+     int B;
+     while(true)
+     {
+          A = MotorRotationCount(OUT_A);
+          B = MotorRotationCount(OUT_B);
+          if(A > 100)
+          {
+               A = 100;
+          }
+          if(A < -100)
+          {
+               A = -100;
+          }
+          if(B > 100)
+          {
+               B = 100;
+          }
+          if(B < -100)
+          {
+               B = -100;
+          }
+          SendRemoteNumber(BT_Conn,1,A);
+          SendRemoteNumber(BT_Conn,3,B);
+     }//while
+}//main
+

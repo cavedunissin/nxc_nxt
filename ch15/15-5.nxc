@@ -1,0 +1,30 @@
+#define line 35
+#define pwr 40
+int a;
+task main()
+{
+    SetSensorLight(S1);
+    SetSensorLight(S3);
+    while(true)
+    {
+        if(Sensor(S1)==Sensor(S3))//WW and BB, go straight
+        {
+             OnFwd(OUT_A,pwr+Sensor(S1));
+             OnFwd(OUT_C,pwr+Sensor(S3));
+             Wait(200);
+        }
+        else if(Sensor(S1)>Sensor(S3))//WB, right
+        {
+             OnFwd(OUT_A,pwr+Sensor(S1)-line);
+             OnFwd(OUT_C,pwr);
+             Wait(200);
+         }
+         else  //BW, left
+         {
+             OnFwd(OUT_A,pwr);
+             OnFwd(OUT_C,pwr+Sensor(S3)-line);
+             Wait(200);
+         }
+    }//while
+}//main
+

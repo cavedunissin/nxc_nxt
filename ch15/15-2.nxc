@@ -1,0 +1,29 @@
+#define Light 40
+#define pwr 70
+task main()
+{
+    SetSensorLight(S1);
+    SetSensorLight(S2);
+    while(true)
+    {
+         if(Sensor(S1)>Light && Sensor(S2)>Light) //1白2白 -> 直走
+         {
+             OnFwdSync(OUT_AC,pwr,0);
+         }//if
+         else if(Sensor(S1)>Light && Sensor(S2)<Light) //1白2黑 -> 右前方修正
+         {
+            OnFwd(OUT_A,pwr);
+            OnFwd(OUT_C,10);
+         }//else if
+        else if(Sensor(S1)<Light && Sensor(S2)>Light) //1黑2白 -> 左前方修正
+        {
+            OnFwd(OUT_A,10);
+            OnFwd(OUT_C,pwr);
+        }//else if
+        else //1黑2黑 -> 直走
+        {
+            OnFwdSync(OUT_AC,pwr,0);
+        }//else
+}//while
+}//main
+

@@ -1,0 +1,23 @@
+byte writebuf[] = {0x02, 0x42}; //指定資料的位址
+byte readbuf[1];
+void checkI2C(byte inport)
+{
+	byte status;
+	do{
+		status= I2CCheckStatus(inport);
+	}while(status == STAT_COMM_PENDING);
+}//checkI2C
+task main()
+{
+  int readcnt = 1; //回傳資料長度
+  SetSensorLowspeed(S1); //指定超音波感應器接在輸入端1
+  while (true)
+  {
+    I2CBytes(S1, writebuf, readcnt, readbuf);
+    ClearScreen();
+    TextOut(10, LCD_LINE4, "Distance:  ");
+    NumOut(70, LCD_LINE4, readbuf[0]);
+    checkI2C(S1);
+  }//while
+}//main
+

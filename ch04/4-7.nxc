@@ -1,0 +1,20 @@
+#define MOVE 500
+#define TURN 360
+task main()
+{
+while(true)
+{
+OnFwd(OUT_AC, 75);
+Wait(MOVE);
+if (Random(2) == 0)
+{
+   OnRev(OUT_C, 75);
+}
+else
+{
+   OnRev(OUT_A, 75);
+}
+Wait(TURN);
+}//while
+}//main
+

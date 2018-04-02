@@ -1,0 +1,9 @@
+#define __NOTETIME 10
+#define __WAITTIME 12
+PlayTone(262,4*__NOTETIME); //Do
+Wait(4*__WAITTIME);
+PlayTone(294,4*__NOTETIME); //Re
+Wait(4*__WAITTIME);
+PlayTone(330,4*__NOTETIME); //Mi
+Wait(4*__WAITTIME);
+

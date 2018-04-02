@@ -1,0 +1,12 @@
+task main(){
+  bool a;
+int b;
+  while(true){
+    ReadButtonEx(BTNRIGHT, false, a, b);
+    TextOut(0,40,"Pressed:");
+    NumOut(50,40,a);
+    TextOut(0,20,"Count:");
+    NumOut(50,20,b);
+  }//while
+}//main
+

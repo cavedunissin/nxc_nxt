@@ -1,0 +1,21 @@
+#define Light 32
+task main()
+{
+     SetSensorLight(S1);
+     while(true)
+     {
+           int L = Sensor(S1);
+           if( L < Light )
+           {
+                Off(OUT_A);
+                OnFwd(OUT_C,50);
+                Wait(300);
+           }//if
+           else if( L > Light )
+           {
+                Off(OUT_C);
+                OnFwd(OUT_A,50);
+           }//else if
+      }//while
+}//main
+

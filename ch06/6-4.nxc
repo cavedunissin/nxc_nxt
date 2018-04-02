@@ -1,0 +1,18 @@
+inline void turning ()
+{
+   OnRev(OUT_C, 75); Wait(900);
+   OnFwd(OUT_BC, 75);
+}//turning
+
+task main()
+{
+   OnFwd(OUT_BC, 75);
+   Wait(1000);
+   turning(); //未傳入任何參數
+   Wait(2000);
+   turning();
+   Wait(1000);
+   turning();
+   Off(OUT_AC);
+}//main
+

@@ -1,0 +1,10 @@
+#define P 50
+#define I 50
+#define D 50
+task main()
+{
+    RotateMotorPID(OUT_A, 100, 180, P, I, D);
+    //A馬達全速運轉 180度, 並設定P值、I值與D值分別為 (50,50,50)
+    Wait(3000);
+}
+
